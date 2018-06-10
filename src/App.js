@@ -1,29 +1,29 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import rootReducer from './ducks'
-
+import Game from './components/Game'
 
 const store = createStore(
   rootReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
+store.dispatch({
+  type: 'INIT',
+  payload: {
+    playerCount: 4
+  }
+})
+
 class App extends Component {
-  render() {
+  render () {
     return (
       <Provider store={store}>
-        <div className="App">
-          <header className="App-header">
-            <h1 className="App-title">Welcome to React</h1>
-          </header>
-          <p className="App-intro">
-            To get started, edit <code>src/App.js</code> and save to reload.
-          </p>
-        </div>
+        <Game />
       </Provider>
-    );
+    )
   }
 }
 
-export default App;
+export default App
